@@ -5,29 +5,20 @@ import {
   BsChatLeftFill,
   BsChevronDown,
   BsFillHouseDownFill,
+  BsFilterLeft,
   BsSearch,
   BsXLg,
 } from "react-icons/bs";
 
 const Sidebar = () => {
-  //   function dropdown() {
-  //     document.querySelector("#submenu").classList.toggle("hidden");
-  //     document.querySelector("#arrow").classList.toggle("rotate-0");
-  //   }
-  //   function open() {
-  //     document.querySelector("#sidebar").classList.toggle("left-[300px]");
-  //   }
+  function dropdown() {
+    document.querySelector("#submenu").classList.toggle("hidden");
+    document.querySelector("#arrow")?.classList.toggle("rotate-0");
+  }
+  function open() {
+    document.querySelector(".sidebar")?.classList.toggle("left-[-300px]");
+  }
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
   return (
     <div className="bg-blue-600 border-red-400 border-2 font-[Poppins]">
       <div className="sidebar left-[-300px] fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-auto text-center bg-gray-900">
@@ -35,7 +26,9 @@ const Sidebar = () => {
           onClick={open()}
           className="absolute text-white text-4xl top-5 left-4 cursor-pointer"
         >
-          <i className="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
+          <i className="bi bi-filter-left px-2 bg-gray-900 rounded-md">
+            <BsFilterLeft />
+          </i>
         </span>
         <div className="text-gray-100 text-xl">
           <div className="p-2.5 mt-1 flex items-center">
