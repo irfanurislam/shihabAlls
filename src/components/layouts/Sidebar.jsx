@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   BsApp,
+  BsAppIndicator,
   BsBoxArrowInRight,
   BsChatLeftFill,
   BsChevronDown,
@@ -11,37 +12,47 @@ import {
 } from "react-icons/bs";
 
 const Sidebar = () => {
-  function dropdown() {
-    document.querySelector("#submenu").classList.toggle("hidden");
-    document.querySelector("#arrow")?.classList.toggle("rotate-0");
-  }
-  function open() {
-    document.querySelector(".sidebar")?.classList.toggle("left-[-300px]");
-  }
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
-    <div className="bg-blue-600 border-red-400 border-2 font-[Poppins]">
-      <div className="sidebar left-[-300px] fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-auto text-center bg-gray-900">
+    <div className="relative font-[Poppins]">
+      {/* Toggle button for opening sidebar */}
+      {!isSidebarOpen && (
         <span
-          onClick={open()}
-          className="absolute text-white text-4xl top-5 left-4 cursor-pointer"
+          onClick={toggleSidebar}
+          className="absolute text-white text-4xl top-5 left-4 cursor-pointer z-50"
         >
-          <i className="bi bi-filter-left px-2 bg-gray-900 rounded-md">
-            <BsFilterLeft />
-          </i>
+          <BsFilterLeft className="px-2 bg-gray-900 rounded-md lg:hidden" />
         </span>
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] 
+           overflow-y-auto text-center bg-gray-900 shadow h-screen  duration-1000 ${
+             isSidebarOpen ? "left-0" : "left-[-300px]"
+           }`}
+      >
         <div className="text-gray-100 text-xl">
           <div className="p-2.5 mt-1 flex items-center">
-            <i className="bi bi-app-indicator px-2 py-1 bg-blue-600 rounded-md">
-              <BsApp />
+            <i className="px-2 py-1 bg-blue-600 rounded-md">
+              <BsAppIndicator />
             </i>
-
             <h1 className="font-extrabold text-gray-200 text-[15px] ml-3">
               Projects
             </h1>
             <i
-              className="bi bi-x ml-20 cursor-pointer lg:hidden"
-              onClick={open()}
+              className="ml-auto cursor-pointer lg:hidden"
+              onClick={toggleSidebar}
             >
               <BsXLg />
             </i>
@@ -49,56 +60,46 @@ const Sidebar = () => {
           <hr className="my-2 text-gray-600" />
         </div>
         <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white">
-          <i className="bi bi-search text-sm">
-            <BsSearch />
-          </i>
+          <BsSearch className="text-sm" />
           <input
             type="text"
-            placeholder="searach"
+            placeholder="search"
             className="text-[15px] ml-4 w-full bg-transparent focus:outline-none"
           />
         </div>
-        <div
-          className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300
-         cursor-pointer hover:bg-blue-600 text-white"
-        >
-          <i className="bi bi-house-door-fill">
-            <BsFillHouseDownFill />
-          </i>
+        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+          <BsFillHouseDownFill />
           <span className="text-[15px] ml-4 text-gray-200">Home</span>
         </div>
-        <div
-          className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300
-         cursor-pointer hover:bg-blue-600 text-white"
-        >
-          <i className="bi bi-bookmark-fill">
-            <BsFillHouseDownFill />
-          </i>
+        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+          <BsFillHouseDownFill />
           <span className="text-[15px] ml-4 text-gray-200">Home two</span>
         </div>
         <hr className="my-2 text-gray-600" />
         <div
-          className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300
-         cursor-pointer hover:bg-blue-600 text-white"
+          className="p-2.5 mt-3 flex items-center rounded-md px-4 transition-transform duration-1000 
+          cursor-pointer hover:bg-blue-600 text-white"
+          onClick={toggleDropdown}
         >
-          <i className="bi bi-chat-left-text-full">
-            <BsChatLeftFill />
-          </i>
-          <div
-            className="flex justify-between w-full items-center"
-            onClick={dropdown()}
-          >
-            <span className="text-[15px] ml-4 text-gray-200">Chatbox</span>
-            <span className="text-sm rotate-180" id="arrow">
-              <i className="bi bi-chat-left-text-full">
-                <BsChevronDown />
-              </i>
-            </span>
+          <BsChatLeftFill />
+          <div className="flex justify-between w-full items-center ">
+            <span className="text-[15px] ml-4 text-gray-200 ">Chatbox</span>
+            <BsChevronDown
+              className={`text-sm transform ${
+                isDropdownOpen ? "rotate-180" : "rotate-0"
+              } transition-transform duration-700`}
+            />
           </div>
         </div>
+        {/* <div
+          className={`text-left text-sm   font-thin mt-2 w-4/5 mx-auto text-gray-200 ${
+            isDropdownOpen ? "block " : "hidden"
+          }`}
+        > */}
         <div
-          className="text-left text-sm font-thin mt-2 w-4/5 mx-auto text-gray-200"
-          id="submenu"
+          className={`text-left text-sm font-thin mt-2 w-4/5 mx-auto text-gray-200 transition-all duration-700 ease-in-out overflow-hidden ${
+            isDropdownOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+          }`}
         >
           <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">
             Social
@@ -110,17 +111,12 @@ const Sidebar = () => {
             Social3
           </h1>
         </div>
-        <div
-          className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300
-         cursor-pointer hover:bg-blue-600 text-white"
-        >
-          <i className="bi bi-box-arrow-right">
-            <BsBoxArrowInRight />
-          </i>
-          <span className="text-[15px] ml-4 text-gray-200">logout</span>
+        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+          <BsBoxArrowInRight />
+          <span className="text-[15px] ml-4 text-gray-200">Logout</span>
         </div>
       </div>
-    </div> //body
+    </div>
   );
 };
 

@@ -6,8 +6,8 @@ import Navbar from "./Navbar";
 const Main = () => {
   return (
     <div>
-      {/* <Sidebar></Sidebar> */}
-      <Navbar></Navbar>
+      <Sidebar></Sidebar>
+      {/* <Navbar></Navbar> */}
     </div>
   );
 };
