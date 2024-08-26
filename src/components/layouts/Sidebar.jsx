@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  BsApp,
   BsAppIndicator,
   BsBoxArrowInRight,
   BsChatLeftFill,
@@ -10,6 +9,7 @@ import {
   BsSearch,
   BsXLg,
 } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -29,7 +29,8 @@ const Sidebar = () => {
       {!isSidebarOpen && (
         <span
           onClick={toggleSidebar}
-          className="absolute text-white text-4xl top-5 left-4 cursor-pointer z-50"
+          className="absolute text-white text-4xl top-5 left-4 cursor-pointer 
+          z-50"
         >
           <BsFilterLeft className="px-2 bg-gray-900 rounded-md lg:hidden" />
         </span>
@@ -67,14 +68,21 @@ const Sidebar = () => {
             className="text-[15px] ml-4 w-full bg-transparent focus:outline-none"
           />
         </div>
-        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-          <BsFillHouseDownFill />
-          <span className="text-[15px] ml-4 text-gray-200">Home</span>
-        </div>
-        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-          <BsFillHouseDownFill />
-          <span className="text-[15px] ml-4 text-gray-200">Home two</span>
-        </div>
+        <Link to={"/"}>
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+            <BsFillHouseDownFill />
+
+            <span className="text-[15px] ml-4 text-gray-200">Home</span>
+          </div>{" "}
+        </Link>
+        <Link to={"/cards"}>
+          {" "}
+          <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+            <BsFillHouseDownFill />
+
+            <span className="text-[15px] ml-4 text-gray-200">Cards</span>
+          </div>{" "}
+        </Link>
         <hr className="my-2 text-gray-600" />
         <div
           className="p-2.5 mt-3 flex items-center rounded-md px-4 transition-transform duration-1000 

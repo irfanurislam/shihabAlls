@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./components/layouts/Main.jsx";
+import Cards from "./pages/Cards.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,12 +15,16 @@ const router = createBrowserRouter([
         path: "/",
         element: <App></App>,
       },
+      {
+        path: "/cards",
+        element: <Cards></Cards>,
+      },
     ],
   },
 ]);
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <div className="bg-blue-600 max-w-[1100px]">
+    <div className="">
       <RouterProvider router={router} />
     </div>
   </StrictMode>

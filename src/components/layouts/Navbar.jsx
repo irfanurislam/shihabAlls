@@ -1,115 +1,91 @@
-import React, { useState } from "react";
-import {
-  BsApp,
-  BsAppIndicator,
-  BsBoxArrowInRight,
-  BsChatLeftFill,
-  BsChevronDown,
-  BsFillHouseDownFill,
-  BsFilterLeft,
-  BsSearch,
-  BsXLg,
-} from "react-icons/bs";
+import { useState } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [dropDownState, setDropDownState] = useState(false);
+  const dropDownMenuRef = useRef();
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  useEffect(() => {
+    const closeDropDown = (e) => {
+      if (!dropDownMenuRef?.current?.contains(e?.target)) {
+        setDropDownState(false);
+      }
+    };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+    document.addEventListener("mousedown", closeDropDown);
+
+    return () => {
+      document.removeEventListener("mousedown", closeDropDown);
+    };
+  }, []);
 
   return (
-    <div className="relative font-[Poppins]">
-      {/* Toggle button for opening sidebar */}
-      {!isSidebarOpen && (
-        <span
-          onClick={toggleSidebar}
-          className="absolute text-white text-4xl top-5 left-4 cursor-pointer z-50"
-        >
-          <BsFilterLeft className="px-2 bg-gray-900 rounded-md lg:hidden" />
-        </span>
-      )}
-
-      {/* Sidebar */}
-      <div
-        className={`fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-auto text-center bg-gray-900 transition-transform duration-300 ${
-          isSidebarOpen ? "left-0" : "left-[-300px]"
-        }`}
-      >
-        <div className="text-gray-100 text-xl">
-          <div className="p-2.5 mt-1 flex items-center">
-            <i className="px-2 py-1 bg-blue-600 rounded-md">
-              <BsAppIndicator />
-            </i>
-            <h1 className="font-extrabold text-gray-200 text-[15px] ml-3">
-              Projects
-            </h1>
-            <i
-              className="ml-auto cursor-pointer lg:hidden"
-              onClick={toggleSidebar}
-            >
-              <BsXLg />
-            </i>
-          </div>
-          <hr className="my-2 text-gray-600" />
-        </div>
-        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white">
-          <BsSearch className="text-sm" />
-          <input
-            type="text"
-            placeholder="search"
-            className="text-[15px] ml-4 w-full bg-transparent focus:outline-none"
-          />
-        </div>
-        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-          <BsFillHouseDownFill />
-          <span className="text-[15px] ml-4 text-gray-200">Home</span>
-        </div>
-        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-          <BsFillHouseDownFill />
-          <span className="text-[15px] ml-4 text-gray-200">Home two</span>
-        </div>
-        <hr className="my-2 text-gray-600" />
-        <div
-          className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
-          onClick={toggleDropdown}
-        >
-          <BsChatLeftFill />
-          <div className="flex justify-between w-full items-center">
-            <span className="text-[15px] ml-4 text-gray-200">Chatbox</span>
-            <BsChevronDown
-              className={`text-sm transform ${
-                isDropdownOpen ? "rotate-0" : "rotate-180"
-              } transition-transform duration-300`}
-            />
-          </div>
-        </div>
-        <div
-          className={`text-left text-sm font-thin mt-2 w-4/5 mx-auto text-gray-200 ${
-            isDropdownOpen ? "block" : "hidden"
-          }`}
-        >
-          <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">
-            Social
-          </h1>
-          <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">
-            Social2
-          </h1>
-          <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">
-            Social3
-          </h1>
-        </div>
-        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-          <BsBoxArrowInRight />
-          <span className="text-[15px] ml-4 text-gray-200">Logout</span>
-        </div>
+    <nav className="flex items-center justify-between bg-gray-900 px-4 py-2 text-white mb-24">
+      <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 text-xl font-semibold text-white transition-all duration-200 hover:scale-110">
+        <h2>Logo</h2>
       </div>
-    </div>
+      <ul className="hidden items-center justify-between gap-10 md:flex">
+        <li className="group flex  cursor-pointer flex-col">
+          Home
+          <span className="mt-[2px] h-[3px] w-[0px] rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+        </li>
+        <li className="group flex  cursor-pointer flex-col">
+          Services
+          <span className="mt-[2px] h-[3px]  w-[0px] rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+        </li>
+        <li className="group flex  cursor-pointer flex-col">
+          About
+          <span className="mt-[2px] h-[3px]  w-[0px] rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+        </li>
+        <Link to={"/cards"}>
+          <li className="group flex  cursor-pointer flex-col">
+            Contact
+            <span className="mt-[2px] h-[3px]  w-[0px] rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+          </li>
+        </Link>
+      </ul>
+      <div
+        ref={dropDownMenuRef}
+        onClick={() => setDropDownState(!dropDownState)}
+        className="relative flex transition-transform md:hidden"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="cursor-pointer"
+        >
+          {" "}
+          <line x1="4" x2="20" y1="12" y2="12" />{" "}
+          <line x1="4" x2="20" y1="6" y2="6" />
+          <line x1="4" x2="20" y1="18" y2="18" />{" "}
+        </svg>
+        {dropDownState && (
+          <ul className=" z-10  gap-2  bg-[#393E46]  absolute right-0 top-11 flex w-[200px] flex-col  rounded-lg   text-base ">
+            <li className="cursor-pointer  px-6 py-2 text-white rounded-t-lg hover:bg-sky-600 ">
+              Home
+            </li>
+            <li className="cursor-pointer  px-6 py-2 text-white hover:bg-sky-600 ">
+              Services
+            </li>
+            <li className="cursor-pointer  px-6 py-2 text-white hover:bg-sky-600 ">
+              About
+            </li>
+            <li className="cursor-pointer  px-6 py-2 text-white hover:bg-sky-600 ">
+              Contact
+            </li>
+          </ul>
+        )}
+      </div>
+    </nav>
   );
 };
 
