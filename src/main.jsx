@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./components/layouts/Main.jsx";
 import Cards from "./pages/Cards.jsx";
 import DashLayout from "./components/layouts/dashboard/DashLayout.jsx";
+import MovieSearch from "./pages/practices/MovieSearch.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/cards",
         element: <Cards></Cards>,
+      },
+      {
+        path: "/movie",
+        element: <MovieSearch />,
       },
     ],
   },
