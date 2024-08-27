@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { FaBars, FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
 const DashNav = ({ sidebarToggle, setSidebarToggle }) => {
+ 
   return (
     <nav className="bg-gray-900  px-4 py-3 flex justify-between">
       <div className="flex items-center text-xl">
