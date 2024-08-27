@@ -11,22 +11,22 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+  // };
 
   return (
     <div className="relative font-[Poppins]">
       {/* Toggle button for opening sidebar */}
-      {!isSidebarOpen && (
+      {/* {!isSidebarOpen && (
         <span
           onClick={toggleSidebar}
           className="absolute text-white text-4xl top-5 left-4 cursor-pointer 
@@ -34,7 +34,7 @@ const Sidebar = () => {
         >
           <BsFilterLeft className="px-2 bg-gray-900 rounded-md lg:hidden" />
         </span>
-      )}
+      )} */}
 
       {/* Sidebar */}
       <div
@@ -91,7 +91,7 @@ const Sidebar = () => {
         >
           <BsChatLeftFill />
           <div className="flex justify-between w-full items-center ">
-            <span className="text-[15px] ml-4 text-gray-200 ">Chatbox</span>
+            <span className="text-[15px] ml-4 text-gray-200 ">Sidebar</span>
             <BsChevronDown
               className={`text-sm transform ${
                 isDropdownOpen ? "rotate-180" : "rotate-0"
@@ -109,9 +109,11 @@ const Sidebar = () => {
             isDropdownOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">
-            Social
-          </h1>
+          <Link to={"/sidebar"}>
+            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">
+              SidebarLayout
+            </h1>
+          </Link>
           <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">
             Social2
           </h1>

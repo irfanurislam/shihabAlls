@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { BsFilterLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   const [dropDownState, setDropDownState] = useState(false);
   const dropDownMenuRef = useRef();
 
@@ -22,9 +23,19 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="flex items-center justify-between bg-gray-900 px-4 py-2 text-white mb-24">
+    <nav className="flex items-center justify-between bg-gray-900 px-4 py-2 
+    text-white mb-24">
       <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 text-xl font-semibold text-white transition-all duration-200 hover:scale-110">
-        <h2>Logo</h2>
+        {!isSidebarOpen && (
+          <span
+            onClick={toggleSidebar}
+            className=" text-white text-4xl  cursor-pointer 
+          "
+          >
+            <BsFilterLeft className="px-2 border border-white bg-gray-900 rounded-md lg:hidden" />
+          </span>
+        )}
+        {/* <h2>Logo</h2> */}
       </div>
       <ul className="hidden items-center justify-between gap-10 md:flex">
         <li className="group flex  cursor-pointer flex-col">

@@ -5,6 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./components/layouts/Main.jsx";
 import Cards from "./pages/Cards.jsx";
+import DashLayout from "./components/layouts/dashboard/DashLayout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
         element: <Cards></Cards>,
       },
     ],
+  },
+  {
+    path: "/sidebar",
+    element: <DashLayout></DashLayout>,
   },
 ]);
 createRoot(document.getElementById("root")).render(
