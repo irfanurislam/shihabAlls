@@ -24,7 +24,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
   // };
 
   return (
-    <div className="relative font-[Poppins]">
+    <div className="relative font-[Poppins] w-80">
       {/* Toggle button for opening sidebar */}
       {/* {!isSidebarOpen && (
         <span
