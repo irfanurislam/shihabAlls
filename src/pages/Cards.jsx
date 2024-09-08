@@ -65,7 +65,9 @@ const CardSkeleton = () => {
   return (
     <div className="max-w-xs mx-auto space-y-2">
       <div className="w-60 h-36 bg-slate-400 animate-pulse rounded-sm"></div>
-      <p className="max-w-60 bg-slate-400 animate-pulse rounded-md h-4"></p>
+      <p className="max-w-60 bg-slate-400 animate-pulse rounded-md h-4">
+        foor card
+      </p>
       <p className="text-gray-500 text-xs max-w-32 bg-slate-400 animate-pulse rounded-md h-4">
         There is a chenle
       </p>
@@ -78,17 +80,19 @@ const CardSkeleton = () => {
 
 const Cards = () => {
   const [isLoading, setLoading] = useState(true);
+  console.log(isLoading);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000); // Simulate a loading time of 2 seconds
+    console.log(timer);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-3 gap-4">
       {data.map((item, index) => (
         <div key={index}>
           {isLoading ? (
