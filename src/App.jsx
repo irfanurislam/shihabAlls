@@ -29,8 +29,8 @@ function App() {
   if (error) return <p>Error: {error}</p>;
   const getFirst15Words = (description) => {
     return (
-      description.split(" ").slice(0, 15).join(" ") +
-      (description.split(" ").length > 15 ? "..." : "")
+      description.split(" ").slice(0, 10).join(" ") +
+      (description.split(" ").length > 10 ? "..." : "")
     );
   };
 
@@ -39,10 +39,14 @@ function App() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {myData &&
           myData.map((datas) => (
-            <div key={datas.title} className="rounded-xl shadow-lg min-h-full ">
+            <div
+              key={datas.title}
+              className="rounded-xl shadow-xl border border-slate-200 min-h-full min-w-full"
+            >
               <div className="p-5 flex flex-col">
                 <div className="rounded-xl overflow-hidden">
                   <img
+                    className="w-full"
                     src="https://i.ibb.co.com/0n8ck0G/ustsqw1468250014.jpg"
                     alt={datas.title}
                   />
@@ -50,15 +54,29 @@ function App() {
                 <h5 className="text-2xl md:text-3xl font-medium mt-3">
                   {datas.title}
                 </h5>
-                <p className="text-slate-500 text-lg mt-3">
+                <p className="text-slate-500 text-lg mt-3 h-32">
                   {getFirst15Words(datas?.description)}
                 </p>
-                <a
-                  href={datas.visitWeb}
-                  className="text-center bg-blue-400 text-white py-2 rounded-lg font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out"
-                >
-                  Visit {datas?.visitWeb}
-                </a>
+                <div className="flex justify-between items-center gap-2">
+                  <a
+                    href={datas.visitWeb}
+                    className="text-center bg-blue-400 text-white px-3 py-1 rounded-xl font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out"
+                  >
+                    Visit web
+                  </a>
+                  <a
+                    href={datas.visitWeb}
+                    className="text-center bg-blue-400 text-white py-1 px-3 rounded-xl font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out"
+                  >
+                    server
+                  </a>
+                  <a
+                    href={datas.visitWeb}
+                    className="text-center bg-blue-400 text-white py-1 px-3 rounded-xl font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out"
+                  >
+                    Client
+                  </a>
+                </div>
               </div>
             </div>
           ))}
