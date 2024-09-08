@@ -47,14 +47,18 @@ function App() {
                 <div className="rounded-xl overflow-hidden">
                   <img
                     className="w-full"
-                    src="https://i.ibb.co.com/0n8ck0G/ustsqw1468250014.jpg"
+                    src="https://i.ibb.co.com/GsshJnR/front.jpg"
                     alt={datas.title}
                   />
                 </div>
                 <h5 className="text-2xl md:text-3xl font-medium mt-3">
                   {datas.title}
                 </h5>
-                <p className="text-slate-500 text-lg mt-3 h-32">
+
+                <p className="text-slate-500 text-lg mt-3">
+                  Skills: {datas?.skills}
+                </p>
+                <p className="text-slate-500 text-lg mt-3 h-20">
                   {getFirst15Words(datas?.description)}
                 </p>
                 <div className="flex justify-between items-center gap-2">
@@ -64,17 +68,18 @@ function App() {
                   >
                     Visit web
                   </a>
-                  <a
-                    href={datas.visitWeb}
-                    className="text-center bg-blue-400 text-white py-1 px-3 rounded-xl font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out"
-                  >
-                    server
-                  </a>
+
                   <a
                     href={datas.visitWeb}
                     className="text-center bg-blue-400 text-white py-1 px-3 rounded-xl font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out"
                   >
                     Client
+                  </a>
+                  <a
+                    href={datas.visitWeb}
+                    className="text-center bg-blue-400 text-white py-1 px-3 rounded-xl font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out"
+                  >
+                    server
                   </a>
                 </div>
               </div>
